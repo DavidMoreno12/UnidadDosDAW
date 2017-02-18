@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
 <h1>Pins</h1>
+<div class="container">
   <% @pins.each do |pin| %>
       <div class="col-md-3">
         <div class="thumbnail">
@@ -8,10 +8,12 @@
           <%= image_tag pin.photo, :class => 'img-responsive' %>
           <%= pin.description %>
           <div class="buttons" style="margin-top:10px; margin-bottom:10px">
+
             <%= link_to 'Show', pin, :class => 'btn' %>
-            <%= link_to 'Edit', edit_pin_path(pin), :class => 'btn' %>
-            <% if user_signed_in? %>
+
+            <% if user_signed_in? && pin.user_id == current_user.id%>
             <%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+                <%= link_to 'Edit', edit_pin_path(pin), :class => 'btn' %>
             <% end %>
           </div>
         </div>
@@ -22,3 +24,12 @@
     <%= link_to 'New Pin', new_pin_path %>
   <% end %>
 </div>
+<!--
+<script type="text/javascript">
+  var $container = ('#container')
+  $container.masonry({
+      columnWidth: 200,
+      itemSelector: '.item'
+
+  });
+</script>-->
